@@ -1,0 +1,1904 @@
+You are a crosscube creator. A crosscube is a multidimensional crossword puzzle. 
+
+Below is Typescript that describes the structure of a crosscube puzzle in the "ipuz" format. I need you to produce JSON according to this schema.
+
+export type BlankCell = '#';
+
+// Number is the clue number, or a colon if there if it's in the 
+// middle of a word. Please use a scalar number type for this and not a string.
+export type StandardCell = number | ':';
+export type SolutionCellValue = {
+  value: string;
+  cell: StandardCell;
+};
+
+export type SolutionCell = BlankCell | SolutionCellValue;
+
+export type PuzzleCell =
+  | BlankCell
+  | StandardCell
+  | {
+      cell: StandardCell | BlankCell;
+      style: { barred: 'L' | 'T' | 'R' | 'B' };
+    };
+
+export type Clue = {
+  answer: string;
+  number: number;
+  clue: string;
+};
+
+export interface PuzzleData {
+  author: string;
+  copyright: string;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  puzzle: PuzzleCell[][];
+  solution: SolutionCell[][];
+  clues: {
+    Across: Clue[];
+    Down: Clue[];
+  };
+  intro: String;
+  version: "http://ipuz.org/v2",
+  origin: "Crossword Compiler 11.15",
+  empty: ":",
+  title: string,
+  kind: ["http://ipuz.org/crossword#1"],
+}
+
+Here is an example of the ipuz JSON based on the above type definition for an 8x8 sized puzzle:
+
+[
+  {
+    "showenumerations": false,
+    "notes": "",
+    "puzzle": [
+      [
+        1,
+        2,
+        3,
+        "#",
+        "#",
+        4,
+        5,
+        6
+      ],
+      [
+        7,
+        ":",
+        ":",
+        8,
+        "#",
+        9,
+        ":",
+        ":"
+      ],
+      [
+        10,
+        ":",
+        ":",
+        ":",
+        11,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        "#",
+        "#",
+        "#",
+        12,
+        ":",
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        13,
+        14,
+        15,
+        ":",
+        ":",
+        "#",
+        "#",
+        "#"
+      ],
+      [
+        16,
+        ":",
+        ":",
+        ":",
+        ":",
+        17,
+        18,
+        19
+      ],
+      [
+        20,
+        ":",
+        ":",
+        "#",
+        21,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        22,
+        ":",
+        ":",
+        "#",
+        "#",
+        23,
+        ":",
+        ":"
+      ]
+    ],
+    "copyright": "",
+    "intro": "",
+    "version": "http://ipuz.org/v2",
+    "origin": "Crossword Compiler 11.15",
+    "empty": ":",
+    "title": "",
+    "kind": [
+      "http://ipuz.org/crossword#1"
+    ],
+    "clues": {
+      "Across": [
+        {
+          "answer": "I've",
+          "number": 1,
+          "clue": "&quot;___ got it!&quot;"
+        },
+        {
+          "number": 4,
+          "clue": "Letters of distress"
+        },
+        {
+          "number": 7,
+          "clue": "Alternative to acrylics"
+        },
+        {
+          "number": 9,
+          "clue": "Relative of an ostrich"
+        },
+        {
+          "number": 10,
+          "clue": "Disconnect"
+        },
+        {
+          "number": 12,
+          "clue": "Police operation"
+        },
+        {
+          "number": 13,
+          "clue": "To the point"
+        },
+        {
+          "number": 16,
+          "clue": "It helps you from sinking"
+        },
+        {
+          "number": 20,
+          "clue": "Coat part"
+        },
+        {
+          "number": 21,
+          "clue": "Wise men"
+        },
+        {
+          "number": 22,
+          "clue": "___ v. Wade"
+        },
+        {
+          "number": 23,
+          "clue": "Chill"
+        }
+      ],
+      "Down": [
+        {
+          "number": 1,
+          "clue": "Debtor's note"
+        },
+        {
+          "number": 2,
+          "clue": "You might drink it in France"
+        },
+        {
+          "number": 3,
+          "clue": "They might be on the shelf"
+        },
+        {
+          "number": 4,
+          "clue": "Alien finders?"
+        },
+        {
+          "number": 5,
+          "clue": "Black cat, maybe"
+        },
+        {
+          "number": 6,
+          "clue": "She ___ her heart out."
+        },
+        {
+          "number": 8,
+          "clue": "Flippant"
+        },
+        {
+          "number": 11,
+          "clue": "Fulton's power"
+        },
+        {
+          "answer": "T-bar",
+          "number": 13,
+          "clue": "Ski lift"
+        },
+        {
+          "number": 14,
+          "clue": "Coin featuring Leonardo da Vinci's Vitruvian Man"
+        },
+        {
+          "number": 15,
+          "clue": "1960 Olympics site"
+        },
+        {
+          "number": 17,
+          "clue": "What you might call your grandmother"
+        },
+        {
+          "number": 18,
+          "clue": "Movie effect"
+        },
+        {
+          "number": 19,
+          "clue": "Poodle's cry"
+        }
+      ]
+    },
+    "dimensions": {
+      "width": 8,
+      "height": 8
+    },
+    "author": "",
+    "solution": [
+      [
+        {
+          "value": "I",
+          "cell": 1
+        },
+        {
+          "value": "V",
+          "cell": 2
+        },
+        {
+          "value": "E",
+          "cell": 3
+        },
+        "#",
+        "#",
+        {
+          "value": "S",
+          "cell": 4
+        },
+        {
+          "value": "O",
+          "cell": 5
+        },
+        {
+          "value": "S",
+          "cell": 6
+        }
+      ],
+      [
+        {
+          "value": "O",
+          "cell": 7
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        },
+        {
+          "value": "L",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": 8
+        },
+        "#",
+        {
+          "value": "E",
+          "cell": 9
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        },
+        {
+          "value": "U",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "U",
+          "cell": 10
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "F",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": 11
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        }
+      ],
+      [
+        "#",
+        "#",
+        "#",
+        {
+          "value": "S",
+          "cell": 12
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "G",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "T",
+          "cell": 13
+        },
+        {
+          "value": "E",
+          "cell": 14
+        },
+        {
+          "value": "R",
+          "cell": 15
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        "#"
+      ],
+      [
+        {
+          "value": "B",
+          "cell": 16
+        },
+        {
+          "value": "U",
+          "cell": ":"
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "Y",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": 17
+        },
+        {
+          "value": "C",
+          "cell": 18
+        },
+        {
+          "value": "Y",
+          "cell": 19
+        }
+      ],
+      [
+        {
+          "value": "A",
+          "cell": 20
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "M",
+          "cell": 21
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "G",
+          "cell": ":"
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "R",
+          "cell": 22
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        {
+          "value": "N",
+          "cell": 23
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        },
+        {
+          "value": "P",
+          "cell": ":"
+        }
+      ]
+    ]
+  },
+  {
+    "showenumerations": false,
+    "notes": "",
+    "puzzle": [
+      [
+        1,
+        2,
+        3,
+        "#",
+        "#",
+        4,
+        5,
+        6
+      ],
+      [
+        7,
+        ":",
+        ":",
+        "#",
+        "#",
+        8,
+        ":",
+        ":"
+      ],
+      [
+        9,
+        ":",
+        ":",
+        "#",
+        10,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        11,
+        ":",
+        ":",
+        12,
+        ":",
+        "#",
+        "#",
+        {
+          "style": {
+            "barred": "L"
+          },
+          "cell": "#"
+        }
+      ],
+      [
+        {
+          "style": {
+            "barred": "T"
+          },
+          "cell": "#"
+        },
+        {
+          "style": {
+            "barred": "L"
+          },
+          "cell": "#"
+        },
+        "#",
+        13,
+        ":",
+        14,
+        15,
+        {
+          "style": {
+            "barred": "T"
+          },
+          "cell": 16
+        }
+      ],
+      [
+        17,
+        18,
+        19,
+        ":",
+        "#",
+        20,
+        ":",
+        ":"
+      ],
+      [
+        21,
+        ":",
+        ":",
+        "#",
+        "#",
+        22,
+        ":",
+        ":"
+      ],
+      [
+        23,
+        ":",
+        ":",
+        "#",
+        "#",
+        24,
+        ":",
+        ":"
+      ]
+    ],
+    "copyright": "",
+    "intro": "",
+    "version": "http://ipuz.org/v2",
+    "origin": "Crossword Compiler 11.26",
+    "empty": ":",
+    "title": "",
+    "kind": [
+      "http://ipuz.org/crossword#1"
+    ],
+    "clues": {
+      "Across": [
+        {
+          "number": 1,
+          "clue": "Cry a river"
+        },
+        {
+          "number": 4,
+          "clue": "Scam"
+        },
+        {
+          "number": 7,
+          "clue": "Pulp Fiction co-star"
+        },
+        {
+          "number": 8,
+          "clue": "Mad. ___"
+        },
+        {
+          "number": 9,
+          "clue": "Get it"
+        },
+        {
+          "number": 10,
+          "clue": "Conflict"
+        },
+        {
+          "number": 11,
+          "clue": "Language Sophocles wrote in"
+        },
+        {
+          "answer": "R and B",
+          "number": 13,
+          "clue": "Grammy category"
+        },
+        {
+          "number": 17,
+          "clue": "&quot;Blah...&quot;"
+        },
+        {
+          "number": 20,
+          "clue": "Prior to, poetically"
+        },
+        {
+          "number": 21,
+          "clue": "Bank offering, for short"
+        },
+        {
+          "answer": "Mu'a",
+          "number": 22,
+          "clue": "[smooch]"
+        },
+        {
+          "number": 23,
+          "clue": "Pea container"
+        },
+        {
+          "number": 24,
+          "clue": "Sound of the universe"
+        }
+      ],
+      "Down": [
+        {
+          "number": 1,
+          "clue": "Vocalized"
+        },
+        {
+          "number": 2,
+          "clue": "&quot;The Leaves of Life keep falling one by one&quot; poet"
+        },
+        {
+          "number": 3,
+          "clue": "Sweetie pie"
+        },
+        {
+          "number": 4,
+          "clue": "Limit"
+        },
+        {
+          "number": 5,
+          "clue": "In vitro items"
+        },
+        {
+          "number": 6,
+          "clue": "After expenses"
+        },
+        {
+          "number": 10,
+          "clue": "Jamaican pop"
+        },
+        {
+          "number": 12,
+          "clue": "Victorian, for one"
+        },
+        {
+          "number": 14,
+          "clue": "Jules Verne captain"
+        },
+        {
+          "number": 15,
+          "clue": "Tap one's fingers"
+        },
+        {
+          "number": 16,
+          "clue": "Smile widely"
+        },
+        {
+          "number": 17,
+          "clue": "Poodle's cry"
+        },
+        {
+          "number": 18,
+          "clue": "Venezuelan river"
+        },
+        {
+          "number": 19,
+          "clue": "June honoree"
+        }
+      ]
+    },
+    "dimensions": {
+      "width": 8,
+      "height": 8
+    },
+    "author": "",
+    "solution": [
+      [
+        {
+          "value": "S",
+          "cell": 1
+        },
+        {
+          "value": "O",
+          "cell": 2
+        },
+        {
+          "value": "B",
+          "cell": 3
+        },
+        "#",
+        "#",
+        {
+          "value": "C",
+          "cell": 4
+        },
+        {
+          "value": "O",
+          "cell": 5
+        },
+        {
+          "value": "N",
+          "cell": 6
+        }
+      ],
+      [
+        {
+          "value": "U",
+          "cell": 7
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        {
+          "value": "A",
+          "cell": 8
+        },
+        {
+          "value": "V",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "N",
+          "cell": 9
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "B",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "S",
+          "cell": 10
+        },
+        {
+          "value": "P",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "G",
+          "cell": 11
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": 12
+        },
+        {
+          "value": "K",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        "#"
+      ],
+      [
+        "#",
+        "#",
+        "#",
+        {
+          "value": "R",
+          "cell": 13
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": 14
+        },
+        {
+          "value": "D",
+          "cell": 15
+        },
+        {
+          "value": "B",
+          "cell": 16
+        }
+      ],
+      [
+        {
+          "value": "Y",
+          "cell": 17
+        },
+        {
+          "value": "A",
+          "cell": 18
+        },
+        {
+          "value": "D",
+          "cell": 19
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "E",
+          "cell": 20
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "I",
+          "cell": 21
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        {
+          "value": "M",
+          "cell": 22
+        },
+        {
+          "value": "U",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "P",
+          "cell": 23
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "D",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        {
+          "value": "O",
+          "cell": 24
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        }
+      ]
+    ]
+  },
+  {
+    "showenumerations": false,
+    "notes": "",
+    "puzzle": [
+      [
+        1,
+        2,
+        3,
+        "#",
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        8,
+        ":",
+        ":",
+        "#",
+        9,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        10,
+        ":",
+        ":",
+        "#",
+        11,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        "#",
+        12,
+        ":",
+        13,
+        ":",
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        14,
+        ":",
+        ":",
+        ":",
+        ":",
+        ":",
+        ":",
+        "#"
+      ],
+      [
+        15,
+        ":",
+        ":",
+        ":",
+        "#",
+        16,
+        ":",
+        17
+      ],
+      [
+        18,
+        ":",
+        ":",
+        ":",
+        "#",
+        19,
+        ":",
+        ":"
+      ],
+      [
+        20,
+        ":",
+        ":",
+        ":",
+        "#",
+        21,
+        ":",
+        ":"
+      ]
+    ],
+    "copyright": "",
+    "intro": "",
+    "version": "http://ipuz.org/v2",
+    "origin": "Crossword Compiler 11.15",
+    "empty": ":",
+    "title": "",
+    "kind": [
+      "http://ipuz.org/crossword#1"
+    ],
+    "clues": {
+      "Across": [
+        {
+          "number": 1,
+          "clue": "Void, in Vichy"
+        },
+        {
+          "number": 4,
+          "clue": "___ mortals"
+        },
+        {
+          "number": 8,
+          "clue": "&quot;Bambi&quot; character"
+        },
+        {
+          "number": 9,
+          "clue": "Dilly"
+        },
+        {
+          "number": 10,
+          "clue": "&quot;The Real Gilligan's Island&quot; channel"
+        },
+        {
+          "number": 11,
+          "clue": "Country addresses: Abbr."
+        },
+        {
+          "number": 12,
+          "clue": "Aretha Franklin's signature song"
+        },
+        {
+          "number": 14,
+          "clue": "One who insists that Obama was born in Kenya"
+        },
+        {
+          "number": 15,
+          "clue": "Halftime lead, e.g."
+        },
+        {
+          "number": 16,
+          "clue": "Feathered stole"
+        },
+        {
+          "number": 18,
+          "clue": "Astringent"
+        },
+        {
+          "number": 19,
+          "clue": "&quot;Acid&quot;"
+        },
+        {
+          "number": 20,
+          "clue": "Department store department"
+        },
+        {
+          "number": 21,
+          "clue": "An Apoc. book"
+        }
+      ],
+      "Down": [
+        {
+          "number": 1,
+          "clue": "After expenses"
+        },
+        {
+          "number": 2,
+          "clue": "Set loose"
+        },
+        {
+          "answer": "laser gun",
+          "number": 3,
+          "clue": "Sci-fi weapon"
+        },
+        {
+          "number": 4,
+          "clue": "Change shape"
+        },
+        {
+          "number": 5,
+          "clue": "Exhaust"
+        },
+        {
+          "answer": "Red Cross",
+          "number": 6,
+          "clue": "Relief provider"
+        },
+        {
+          "number": 7,
+          "clue": "At one time, at one time"
+        },
+        {
+          "number": 13,
+          "clue": "Arises"
+        },
+        {
+          "number": 14,
+          "clue": "Laser light"
+        },
+        {
+          "number": 17,
+          "clue": "2 + 2"
+        }
+      ]
+    },
+    "dimensions": {
+      "width": 8,
+      "height": 8
+    },
+    "author": "",
+    "solution": [
+      [
+        {
+          "value": "N",
+          "cell": 1
+        },
+        {
+          "value": "U",
+          "cell": 2
+        },
+        {
+          "value": "L",
+          "cell": 3
+        },
+        "#",
+        {
+          "value": "M",
+          "cell": 4
+        },
+        {
+          "value": "E",
+          "cell": 5
+        },
+        {
+          "value": "R",
+          "cell": 6
+        },
+        {
+          "value": "E",
+          "cell": 7
+        }
+      ],
+      [
+        {
+          "value": "E",
+          "cell": 8
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "O",
+          "cell": 9
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "T",
+          "cell": 10
+        },
+        {
+          "value": "B",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "R",
+          "cell": 11
+        },
+        {
+          "value": "F",
+          "cell": ":"
+        },
+        {
+          "value": "D",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        }
+      ],
+      [
+        "#",
+        {
+          "value": "R",
+          "cell": 12
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": 13
+        },
+        {
+          "value": "P",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "C",
+          "cell": ":"
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "B",
+          "cell": 14
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        },
+        {
+          "value": "H",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        "#"
+      ],
+      [
+        {
+          "value": "E",
+          "cell": 15
+        },
+        {
+          "value": "D",
+          "cell": ":"
+        },
+        {
+          "value": "G",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "B",
+          "cell": 16
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": 17
+        }
+      ],
+      [
+        {
+          "value": "A",
+          "cell": 18
+        },
+        {
+          "value": "L",
+          "cell": ":"
+        },
+        {
+          "value": "U",
+          "cell": ":"
+        },
+        {
+          "value": "M",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "L",
+          "cell": 19
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        {
+          "value": "D",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "M",
+          "cell": 20
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "E",
+          "cell": 21
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        {
+          "value": "D",
+          "cell": ":"
+        }
+      ]
+    ]
+  },
+  {
+    "showenumerations": false,
+    "notes": "",
+    "puzzle": [
+      [
+        1,
+        2,
+        3,
+        "#",
+        "#",
+        4,
+        5,
+        6
+      ],
+      [
+        7,
+        ":",
+        ":",
+        8,
+        "#",
+        9,
+        ":",
+        ":"
+      ],
+      [
+        10,
+        ":",
+        ":",
+        ":",
+        "#",
+        11,
+        ":",
+        ":"
+      ],
+      [
+        12,
+        ":",
+        ":",
+        ":",
+        13,
+        ":",
+        ":",
+        "#"
+      ],
+      [
+        "#",
+        14,
+        ":",
+        ":",
+        ":",
+        ":",
+        ":",
+        15
+      ],
+      [
+        16,
+        ":",
+        ":",
+        "#",
+        17,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        18,
+        ":",
+        ":",
+        "#",
+        19,
+        ":",
+        ":",
+        ":"
+      ],
+      [
+        20,
+        ":",
+        ":",
+        "#",
+        "#",
+        21,
+        ":",
+        ":"
+      ]
+    ],
+    "copyright": "",
+    "intro": "",
+    "version": "http://ipuz.org/v2",
+    "origin": "Crossword Compiler 11.15",
+    "empty": ":",
+    "title": "",
+    "kind": [
+      "http://ipuz.org/crossword#1"
+    ],
+    "clues": {
+      "Across": [
+        {
+          "number": 1,
+          "clue": "Throbbing energy?"
+        },
+        {
+          "number": 4,
+          "clue": "&quot;Sk8er ___&quot; (Avril Lavigne hit)"
+        },
+        {
+          "number": 7,
+          "clue": "&quot;Saving Private ___&quot;"
+        },
+        {
+          "number": 9,
+          "clue": "&quot;Walking on Thin Ice&quot; singer"
+        },
+        {
+          "answer": "St-Lô",
+          "number": 10,
+          "clue": "Allied victory site of 1944"
+        },
+        {
+          "number": 11,
+          "clue": "100 bani, in Romania"
+        },
+        {
+          "number": 12,
+          "clue": "Coffee holder"
+        },
+        {
+          "number": 14,
+          "clue": "Perception"
+        },
+        {
+          "number": 16,
+          "clue": "Trick taker, often"
+        },
+        {
+          "number": 17,
+          "clue": "High-hatter"
+        },
+        {
+          "number": 18,
+          "clue": "&quot;___ Boot&quot;"
+        },
+        {
+          "number": 19,
+          "clue": "Ciao!"
+        },
+        {
+          "number": 20,
+          "clue": "Bajillions"
+        },
+        {
+          "number": 21,
+          "clue": "Kazakhstan, once: Abbr."
+        }
+      ],
+      "Down": [
+        {
+          "number": 1,
+          "clue": "At one time, at one time"
+        },
+        {
+          "number": 2,
+          "clue": "Like unicorns"
+        },
+        {
+          "number": 3,
+          "clue": "Feature of Edward Cullen"
+        },
+        {
+          "number": 4,
+          "clue": "Deli stock"
+        },
+        {
+          "answer": "one shots",
+          "number": 5,
+          "clue": "Special-issue magazines"
+        },
+        {
+          "number": 6,
+          "clue": "Chit"
+        },
+        {
+          "number": 8,
+          "clue": "Connectives"
+        },
+        {
+          "number": 13,
+          "clue": "Mispelled misplacement?"
+        },
+        {
+          "answer": "T-bar",
+          "number": 15,
+          "clue": "Alpine transport"
+        },
+        {
+          "number": 16,
+          "clue": "2 + 2"
+        }
+      ]
+    },
+    "dimensions": {
+      "width": 8,
+      "height": 8
+    },
+    "author": "",
+    "solution": [
+      [
+        {
+          "value": "E",
+          "cell": 1
+        },
+        {
+          "value": "M",
+          "cell": 2
+        },
+        {
+          "value": "P",
+          "cell": 3
+        },
+        "#",
+        "#",
+        {
+          "value": "B",
+          "cell": 4
+        },
+        {
+          "value": "O",
+          "cell": 5
+        },
+        {
+          "value": "I",
+          "cell": 6
+        }
+      ],
+      [
+        {
+          "value": "R",
+          "cell": 7
+        },
+        {
+          "value": "Y",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "N",
+          "cell": 8
+        },
+        "#",
+        {
+          "value": "O",
+          "cell": 9
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "S",
+          "cell": 10
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        },
+        {
+          "value": "L",
+          "cell": ":"
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "L",
+          "cell": 11
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "U",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "T",
+          "cell": 12
+        },
+        {
+          "value": "H",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        },
+        {
+          "value": "M",
+          "cell": 13
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        "#"
+      ],
+      [
+        "#",
+        {
+          "value": "I",
+          "cell": 14
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        {
+          "value": "I",
+          "cell": ":"
+        },
+        {
+          "value": "G",
+          "cell": ":"
+        },
+        {
+          "value": "H",
+          "cell": ":"
+        },
+        {
+          "value": "T",
+          "cell": 15
+        }
+      ],
+      [
+        {
+          "value": "A",
+          "cell": 16
+        },
+        {
+          "value": "C",
+          "cell": ":"
+        },
+        {
+          "value": "E",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "S",
+          "cell": 17
+        },
+        {
+          "value": "N",
+          "cell": ":"
+        },
+        {
+          "value": "O",
+          "cell": ":"
+        },
+        {
+          "value": "B",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "D",
+          "cell": 18
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        "#",
+        {
+          "value": "T",
+          "cell": 19
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        },
+        {
+          "value": "T",
+          "cell": ":"
+        },
+        {
+          "value": "A",
+          "cell": ":"
+        }
+      ],
+      [
+        {
+          "value": "D",
+          "cell": 20
+        },
+        {
+          "value": "L",
+          "cell": ":"
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        "#",
+        "#",
+        {
+          "value": "S",
+          "cell": 21
+        },
+        {
+          "value": "S",
+          "cell": ":"
+        },
+        {
+          "value": "R",
+          "cell": ":"
+        }
+      ]
+    ]
+  }
+]
+
+The width of this puzzle is 8 since the length of each item in "puzzle" is 8. Since it is 8, the 8th column for the first side (first item in the array) is the same as the 1st column on the second side. All first and last columns share the same letters and clues and their adjacent side. The last side's 8th column shares the 1st sides column, hence closing the cube.
+
+Since there are four items in the array, that means this puzzle has four sides, like a cube. We will only support four-sided cubes for now.
+
+You will require some information to create the puzzle:
+
+1. Its dimensions, e.g., is it 8x8 or 5x5?
+2. It's theme
+3. It's difficulty
+
+Tips:
+
+1. When you build the puzzle, first start with a blank grid, then add the empty squares for each side which tells you where answers will start (and give you the clue numbers). This also tells you how many clues/answers there will be.
+2. Then start by adding a word based on the theme. Then find other words that intersect with the first word.
+3. You might need to change out words on other sides if you cannot find a good answer that intersects with a word from an adjacent side. In that case, restart add words.
+4. Finally, come up with the clues last after you have a valid grid.
+
+Conditions:
+
+1. Answers must be at least three letters long.
+2. The spaces in the puzzle can not create an offensive picture formed by the remaining empty answer cells. Watch out for shapes that look like a swastika, especially.
+3. No answer can repeat itself.
+4. While it's important to adhere to a theme, it is okay to break from it if you get stuck.
+5. For "author," put "Leonard Souza + ChatGPT"
+6. Clues must make sense for the answer.
+
+Data output that you return:
+
+An array of ipuz documents whose leftmost and rightmost columns share letters with adjacent sides in JSON
